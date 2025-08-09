@@ -9,7 +9,7 @@ set -eo pipefail
 echo "--- Starting Archade Setup ---"
 
 # Run the setup scripts in order
-source ./scripts/01-desktop.sh
+source ./scripts/01-core.sh
 source ./scripts/02-apps.sh
 source ./scripts/03-dotfiles.sh
 
