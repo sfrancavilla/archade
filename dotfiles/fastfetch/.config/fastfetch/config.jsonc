@@ -6,7 +6,7 @@
     "height": 16,
     "padding": {
       "left": 2,
-      "top": 2
+      "top": 4
     }
   },
   "display": {
@@ -16,15 +16,14 @@
   "modules": [
     {
       "type": "command",
-      "text": "splash=$(hyprctl splash);echo $splash",
-      "margin": {
-        "top": 2
-      }
+      "key": "Archade says",
+      "keyColor": "blue",
+      "text": "splash=$(hyprctl splash);echo $splash"
     },
     "break",
     {
       "type": "custom",
-      "format": "┌────────────────────────────────────────────────────────────────┐"
+      "format": "┌────────────────────────────────────────────────────────────────────┐"
     },
     { "type": "os",       "key": "  󰣇 OS      ", "keyColor": "cyan"   },
     { "type": "host",     "key": "  󰒋 Host    ", "keyColor": "cyan"   },
@@ -42,7 +41,7 @@
     { "type": "memory",   "key": "  󰍛 Memory  ", "keyColor": "blue"   },
     {
       "type": "custom",
-      "format": "└────────────────────────────────────────────────────────────────┘"
+      "format": "└────────────────────────────────────────────────────────────────────┘"
     },
     "break",
     "title",
