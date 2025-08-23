@@ -6,3 +6,6 @@
 if command -v fastfetch &> /dev/null; then
     fastfetch
 fi
+
+# Initialize Starship Prompt
+eval "$(starship init zsh)"

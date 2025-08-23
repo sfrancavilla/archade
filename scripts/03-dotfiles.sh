@@ -13,8 +13,9 @@ DOTFILES_DIR="dotfiles"
 DIRECTORIES=(
     "hyprland"
     "kitty"
-    "zsh"
+    "starship"
     "waybar"
+    "zsh"
 )
 
 # Stow the directories

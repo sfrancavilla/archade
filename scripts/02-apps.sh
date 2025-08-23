@@ -5,6 +5,10 @@ set -eo pipefail
 
 echo "--- Installing User Applications ---"
 
+# --- SHELL & PROMPT ---
+echo "Installing Zsh shell and Starship prompt..."
+yay -S --noconfirm zsh starship
+
 # --- Web Browser ---
 echo "Installing Google Chrome..."
 yay -S --noconfirm google-chrome
