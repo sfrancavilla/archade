@@ -3,83 +3,34 @@
   "logo": {
     "source": "~/.config/fastfetch/logo/archade.png",
     "type": "kitty",
-    "height": 18
+    "width": 20,
+    "padding": {
+      "left": 4,
+      "top": 4
+    }
   },
   "display": {
-    "separator": " : "
+    "separator": "  ",
+    "color": "yellow"
   },
   "modules": [
-    {
-      "type": "command",
-      "key": "  ",
-      "keyColor": "blue",
-      "text": "splash=$(hyprctl splash);echo $splash"
-    },
-    {
-      "type": "custom",
-      "format": "┌──────────────────────────────────────────┐",
-      "margin": {
-        "top": 3,
-        "bottom": 1
-      }
-    },
-    {
-      "type": "chassis",
-      "key": "  󰇺 Chassis",
-      "format": "{1} {2} {3}"
-    },
-    {
-      "type": "os",
-      "key": "  󰣇 OS",
-      "format": "{2}",
-      "keyColor": "red"
-    },
-    {
-      "type": "kernel",
-      "key": "   Kernel",
-      "format": "{2}",
-      "keyColor": "red"
-    },
-    {
-      "type": "packages",
-      "key": "  󰏗 Packages",
-      "keyColor": "green"
-    },
-    {
-      "type": "display",
-      "key": "  󰍹 Display",
-      "format": "{1}x{2} @ {3}Hz [{7}]",
-      "keyColor": "green"
-    },
-    {
-      "type": "terminal",
-      "key": "   Terminal",
-      "keyColor": "yellow"
-    },
-    {
-      "type": "wm",
-      "key": "  󱗃 WM",
-      "format": "{2}",
-      "keyColor": "yellow"
-    },
-    { "type": "os", "keyColor": "cyan" },
-    { "type": "host", "keyColor": "cyan" },
-    { "type": "kernel", "keyColor": "cyan" },
-    { "type": "uptime", "keyColor": "cyan" },
+    "title",
+    "separator",
+    { "type": "os",       "key": "󰣇 ", "keyColor": "cyan"   },
+    { "type": "host",     "key": "󰒋 ", "keyColor": "cyan"   },
+    { "type": "kernel",   "key": " ", "keyColor": "cyan"   },
+    { "type": "packages", "key": "󰏗 ", "keyColor": "cyan"   },
+    { "type": "uptime",   "key": "󰔟 ", "keyColor": "cyan"   },
     "break",
-    { "type": "wm", "key": "WM", "keyColor": "yellow" },
-    { "type": "terminal", "keyColor": "yellow" },
-    { "type": "shell", "keyColor": "yellow" },
+    { "type": "wm",       "key": "󰖲 ", "keyColor": "magenta"},
+    { "type": "terminal", "key": " ", "keyColor": "magenta"},
+    { "type": "shell",    "key": " ", "keyColor": "magenta"},
+    { "type": "display",  "key": "󰍹 ", "keyColor": "magenta"},
     "break",
-    { "type": "cpu", "keyColor": "magenta" },
-    { "type": "gpu", "keyColor": "magenta" },
-    { "type": "memory", "keyColor": "magenta" },
+    { "type": "cpu",      "key": " ", "keyColor": "blue"   },
+    { "type": "gpu",      "key": "󰍛 ", "keyColor": "blue"   },
+    { "type": "memory",   "key": "󰍛 ", "keyColor": "blue"   },
     "break",
-    {
-      "type": "colors",
-      "paddingLeft": 2,
-      "symbol": "circle"
-    },
-    "break"
+    "colors"
   ]
 }
