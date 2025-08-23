@@ -3,15 +3,14 @@
   "logo": {
     "source": "~/.config/fastfetch/logo/archade.png",
     "type": "kitty",
-    "height": 16,
+    "height": 18,
     "padding": {
       "left": 2,
-      "top": 4
+      "top": 3
     }
   },
   "display": {
-    "separator": "  ",
-    "color": "yellow"
+    "separator": " : "
   },
   "modules": [
     {
@@ -23,7 +22,10 @@
     "break",
     {
       "type": "custom",
-      "format": "┌────────────────────────────────────────────────────────────────────┐"
+      "format": "┌────────────────────────────────────────────────────────────────────┐",
+      "padding": {
+        "bottom": 2
+      }
     },
     { "type": "os",       "key": "  󰣇 OS      ", "keyColor": "cyan"   },
     { "type": "host",     "key": "  󰒋 Host    ", "keyColor": "cyan"   },
@@ -41,10 +43,13 @@
     { "type": "memory",   "key": "  󰍛 Memory  ", "keyColor": "blue"   },
     {
       "type": "custom",
-      "format": "└────────────────────────────────────────────────────────────────────┘"
+      "format": "└────────────────────────────────────────────────────────────────────┘",
+      "padding": {
+        "top": 2
+      }
     },
     "break",
-    "title",
+    { "type": "title", "key": "  Connected as", "keyColor": "green" },
     "break",
     {
       "type": "colors",
