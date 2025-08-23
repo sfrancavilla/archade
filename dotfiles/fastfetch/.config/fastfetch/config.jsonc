@@ -6,8 +6,7 @@
     "height": 18
   },
   "display": {
-    "separator": "  ",
-    "color": "blue"
+    "separator": " : "
   },
   "modules": [
     {
@@ -18,15 +17,51 @@
     },
     {
       "type": "custom",
-      "format": "┌──────────────────────────────────────────┐"
+      "format": "┌──────────────────────────────────────────┐",
+      "margin": {
+        "top": 3,
+        "bottom": 1
+      }
     },
     {
       "type": "chassis",
       "key": "  󰇺 Chassis",
       "format": "{1} {2} {3}"
     },
-    "title",
-    "separator",
+    {
+      "type": "os",
+      "key": "  󰣇 OS",
+      "format": "{2}",
+      "keyColor": "red"
+    },
+    {
+      "type": "kernel",
+      "key": "   Kernel",
+      "format": "{2}",
+      "keyColor": "red"
+    },
+    {
+      "type": "packages",
+      "key": "  󰏗 Packages",
+      "keyColor": "green"
+    },
+    {
+      "type": "display",
+      "key": "  󰍹 Display",
+      "format": "{1}x{2} @ {3}Hz [{7}]",
+      "keyColor": "green"
+    },
+    {
+      "type": "terminal",
+      "key": "   Terminal",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "wm",
+      "key": "  󱗃 WM",
+      "format": "{2}",
+      "keyColor": "yellow"
+    },
     { "type": "os", "keyColor": "cyan" },
     { "type": "host", "keyColor": "cyan" },
     { "type": "kernel", "keyColor": "cyan" },
