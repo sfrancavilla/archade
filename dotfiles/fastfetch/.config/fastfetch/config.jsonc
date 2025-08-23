@@ -16,35 +16,33 @@
   "modules": [
     {
       "type": "command",
-      "key": "  ",
-      "keyColor": "blue",
       "text": "splash=$(hyprctl splash);echo $splash",
       "margin": {
-        "top": 1
+        "top": 2
       }
     },
     "break",
     {
       "type": "custom",
-      "format": "┌──────────────────────────────────────────┐"
+      "format": "┌────────────────────────────────────────────────────────────────┐"
     },
-    { "type": "os",       "key": "󰣇 OS      ", "keyColor": "cyan"   },
-    { "type": "host",     "key": "󰒋 Host    ", "keyColor": "cyan"   },
-    { "type": "kernel",   "key": " Kernel  ", "keyColor": "cyan"   },
-    { "type": "packages", "key": "󰏗 Packages", "keyColor": "cyan"   },
-    { "type": "uptime",   "key": "󰔟 Uptime  ", "keyColor": "cyan"   },
+    { "type": "os",       "key": "  󰣇 OS      ", "keyColor": "cyan"   },
+    { "type": "host",     "key": "  󰒋 Host    ", "keyColor": "cyan"   },
+    { "type": "kernel",   "key": "   Kernel  ", "keyColor": "cyan"   },
+    { "type": "packages", "key": "  󰏗 Packages", "keyColor": "cyan"   },
+    { "type": "uptime",   "key": "  󰔟 Uptime  ", "keyColor": "cyan"   },
     "break",
-    { "type": "wm",       "key": "󰖲 WM      ", "keyColor": "magenta"},
-    { "type": "terminal", "key": " Terminal", "keyColor": "magenta"},
-    { "type": "shell",    "key": " Shell   ", "keyColor": "magenta"},
-    { "type": "display",  "key": "󰍹 Display ", "keyColor": "magenta"},
+    { "type": "wm",       "key": "  󰖲 WM      ", "keyColor": "magenta"},
+    { "type": "terminal", "key": "   Terminal", "keyColor": "magenta"},
+    { "type": "shell",    "key": "   Shell   ", "keyColor": "magenta"},
+    { "type": "display",  "key": "  󰍹 Display ", "keyColor": "magenta"},
     "break",
-    { "type": "cpu",      "key": " CPU     ", "keyColor": "blue"   },
-    { "type": "gpu",      "key": "󰍛 GPU     ", "keyColor": "blue"   },
-    { "type": "memory",   "key": "󰍛 Memory  ", "keyColor": "blue"   },
+    { "type": "cpu",      "key": "   CPU     ", "keyColor": "blue"   },
+    { "type": "gpu",      "key": "  󰍛 GPU     ", "keyColor": "blue"   },
+    { "type": "memory",   "key": "  󰍛 Memory  ", "keyColor": "blue"   },
     {
       "type": "custom",
-      "format": "└──────────────────────────────────────────┘"
+      "format": "└────────────────────────────────────────────────────────────────┘"
     },
     "break",
     "title",
