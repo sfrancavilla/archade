@@ -25,6 +25,12 @@ else
     echo "--- yay is already installed. Skipping. ---"
 fi
 
+# --- SILENCE HARMLESS ERRORS ---
+# The polkit-kde-agent will throw an error if this directory doesn't exist.
+# This creates it preemptively to keep logs clean.
+echo "--- Applying preemptive fixes for clean logs ---"
+sudo mkdir -p /usr/share/polkit-1/actions/
+
 # --- INSTALL HYPRLAND AND CORE COMPONENTS ---
 echo "--- Installing Hyprland and essential components... ---"
 
