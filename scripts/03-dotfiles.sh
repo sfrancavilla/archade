@@ -11,12 +11,12 @@ DOTFILES_DIR="dotfiles"
 
 # List of directories to stow
 DIRECTORIES=(
-    "fastfetch"
     "hyprland"
-    "kitty"
-    "starship"
-    "waybar"
-    "zsh"
+    waybar
+    kitty
+    starship
+    zsh
+    fastfetch
 )
 
 # Stow the directories
