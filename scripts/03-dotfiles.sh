@@ -11,6 +11,7 @@ DOTFILES_DIR="dotfiles"
 
 # List of directories to stow
 DIRECTORIES=(
+    "fastfetch"
     "hyprland"
     "kitty"
     "starship"
