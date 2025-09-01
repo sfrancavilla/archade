@@ -1,0 +1,19 @@
+* {
+    font-family: 'CaskaydiaCove Nerd Font', sans-serif;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.5);
+    color: #ffffff;
+    border-radius: 0px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #ffffff;
+}
+
+#workspaces button.active {
+    background-color: #64727D;
+}
