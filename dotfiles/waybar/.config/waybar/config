@@ -1,7 +1,6 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 40,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "pulseaudio", "network"],
@@ -20,7 +19,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%H:%M 󰥔 %d/%m}",
+        "format": "{:%H:%M  %d/%m}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "pulseaudio": {
