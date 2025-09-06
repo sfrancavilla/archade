@@ -1,26 +1,28 @@
 {
     "layer": "top",
     "position": "top",
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "network"],
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "default": "1"
-        }
-    },
-    "tray": {
-        "icon-size": 18,
-        "spacing": 10
-    },
+    "spacing": 10,
+    "modules-left": ["clock"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["battery", "pulseaudio", "network", "custom/launcher"],
     "clock": {
-        "format": "{:%H:%M  %d/%m}",
+        "format": "{:%a %H:%M, %b %d %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+   "battery": {
+        "interval": 10,
+        "states": {
+		    "warning": 30,
+		    "critical": 15
+	    },
+	    "events": {
+		    "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+		    "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+		    "on-charging-100": "notify-send -u normal 'Battery Full!'"
+	    },
+	    "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 󰂄",
+	    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "pulseaudio": {
         "format": "{volume}% {icon}",
@@ -31,9 +33,15 @@
         "on-click": "pavucontrol"
     },
     "network": {
-        "format-wifi": "{essid} 󰖩",
-        "format-ethernet": "{ifname} 󰈀",
+        "format-wifi": "{essid} ",
+        "format-ethernet": "{ifname} ",
         "format-disconnected": "󰖪 Disconnected",
-        "tooltip-format": "{ifname} via {gwaddr} "
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "on-click": "kitty --title \"nmtui-floating\" nmtui"
+    },
+    "custom/launcher": {
+        "format": " ",
+        "on-click": "wofi",
+        "tooltip-format": "Search applications"
     }
 }

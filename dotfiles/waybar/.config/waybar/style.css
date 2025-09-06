@@ -1,6 +1,7 @@
 * {
     font-family: 'CaskaydiaCove Nerd Font', sans-serif;
     font-size: 14px;
+    padding: 1px 3px 1px 3px;
 }
 
 window#waybar {
@@ -10,10 +11,20 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 5px;
     color: #ffffff;
+    padding: 0px 5px 0px;
+    margin: 0px 2px 0px;
 }
 
 #workspaces button.active {
     background-color: #64727D;
+    border-radius: 5px;
+}
+
+#network {
+    padding: 0px 10px 0px;
+}
+
+#battery {
+    padding: 0px 10px 0px;
 }

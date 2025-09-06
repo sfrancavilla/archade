@@ -47,6 +47,7 @@ PACKAGES=(
     wireplumber    # Session manager for PipeWire
     xdg-desktop-portal-hyprland
     qt5-wayland qt6-wayland # For app compatibility
+    swww           # Wallpaper manager
     nerd-fonts-cascadia-code      # Primary terminal font
     ttf-nerd-fonts-symbols-common # Icon fallback
     noto-fonts noto-fonts-cjk noto-fonts-emoji # System-wide font support

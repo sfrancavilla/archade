@@ -1,0 +1,53 @@
+/* --- Base Window --- */
+window {
+    background-color: rgba(46, 52, 64, 0.9); /* Dark, semi-transparent background */
+    border: 2px solid #81A1C1; /* Nord-themed blue border */
+    border-radius: 15px;
+    font-family: "CaskaydiaCove Nerd Font";
+    font-size: 16px;
+    color: #ECEFF4; /* Light text color */
+}
+
+/* --- Search Bar --- */
+#input {
+    background-color: #3B4252; /* Slightly lighter background for the input */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+    border: none;
+    color: #ECEFF4;
+}
+
+#input:focus {
+    outline: none;
+}
+
+/* --- Results List --- */
+#scroll {
+    margin: 0px 15px 15px 15px; /* Top, Right, Bottom, Left */
+}
+
+/* --- Individual Result Entry --- */
+#entry {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* --- Hover/Selected Entry --- */
+#entry:selected {
+    background-color: #81A1C1; /* Highlight with the same blue */
+}
+
+/* --- Application Icon --- */
+#img {
+    margin-right: 10px;
+}
+
+/* --- Application Name --- */
+#text {
+    color: #D8DEE9; /* Main text color */
+}
+
+#entry:selected #text {
+    color: #2E3440; /* Dark text on highlight */
+}
