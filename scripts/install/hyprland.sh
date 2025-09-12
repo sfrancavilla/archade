@@ -6,10 +6,8 @@
 set -eo pipefail
 
 # --- 0. SETUP AND CLEANUP ---
-# Create a unique temporary directory for the build process.
-# This prevents conflicts with any previous, failed build attempts.
-# The 'mktemp -d' command creates a new directory inside /tmp.
-TMP_DIR=$(mktemp -d)
+# The 'mktemp -d' command creates a new directory in the specified location.
+TMP_DIR=$(mktemp -d "$HOME/hyprland-build.XXXXXX")
 
 # Define a cleanup function. This will be called when the script exits.
 cleanup() {
@@ -43,10 +41,9 @@ pushd "$TMP_DIR"
 # The --recursive flag is important as it pulls in necessary submodules.
 git clone --recursive https://github.com/hyprwm/Hyprland .
 
-# Enter the newly created directory (git creates one inside the current dir)
-cd Hyprland
-
-# Compile the source code and install it to the system
+# With 'git clone ... .', the repository contents are placed directly
+# into the current directory, so we don't need to 'cd' into a subfolder.
+# Compile the source code and install it to the system.
 make all && sudo make install
 
 # Go back to the original directory.
@@ -54,3 +51,4 @@ popd
 
 echo "--- Hyprland has been successfully installed! ---"
 # The 'cleanup' function will now be called automatically by the trap.
+
