@@ -5,38 +5,43 @@
 # Stop on any error
 set -eo pipefail
 
-# --- 0. SETUP AND CLEANUP ---
-# Create a temporary directory in the user's home directory.
-TMP_DIR=$(mktemp -d "$HOME/font-build.XXXXXX")
-
-# Define a cleanup function. This will be called when the script exits.
-cleanup() {
-  echo "--- Cleaning up temporary font directory: $TMP_DIR ---"
-  rm -rf "$TMP_DIR"
-}
-
-# Set a trap to run the cleanup function on exit, error, or interrupt.
-trap cleanup EXIT ERR INT TERM
-
-# --- 1. INSTALL SYSTEM FONTS ---
+# --- 0. INSTALL SYSTEM FONTS ---
 echo "--- Installing Noto fonts from official repositories... ---"
 sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-cjk noto-fonts-emoji
 
-# --- 2. INSTALL NERD FONTS FROM SOURCE ---
-echo "--- Installing Nerd Fonts from source... ---"
+echo "--- Starting local font installation ---"
+# --- 1. DEFINE FILE PATHS ---
+# Get the absolute path to the directory where this script is located.
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
-# Navigate into our temporary directory
-pushd "$TMP_DIR"
+# Define the source directory for our local font files.
+# This navigates up two levels from 'scripts/install/' to the project root.
+SOURCE_DIR="$SCRIPT_DIR/../../local-fonts"
 
-# Clone the official Nerd Fonts repository
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-cd nerd-fonts
+# Define the destination directories on the system.
+# Fonts will be installed for the current user.
+USER_FONT_DIR="$HOME/.local/share/fonts"
+# Font configuration is system-wide and requires sudo.
+SYSTEM_CONF_DIR="/etc/fonts/conf.d"
 
-# Install both fonts with a single command
-./install.sh CascadiaCode Symbols-Only
+# --- 2. ENSURE DESTINATION DIRECTORIES EXIST ---
+echo "--- Ensuring font directories exist... ---"
+mkdir -p "$USER_FONT_DIR"
 
-# Go back to the original directory
-popd
+# --- 3. COPY FONT AND CONFIGURATION FILES ---
+echo "--- Copying font files... ---"
+# The -v flag makes 'cp' verbose, showing which files are being copied.
+cp -v "$SOURCE_DIR/CascadiaCode/"* "$USER_FONT_DIR/"
+cp -v "$SOURCE_DIR/Symbols-Only/"* "$USER_FONT_DIR/"
+
+echo "--- Installing system-wide font configuration... ---"
+# This requires sudo because it's a system directory.
+sudo cp -v "$SOURCE_DIR/10-nerd-font-symbols.conf" "$SYSTEM_CONF_DIR/"
+
+# --- 4. REBUILD THE FONT CACHE ---
+# This is a critical step. It tells the system to re-scan all font
+# directories and update its index of available fonts and rules.
+echo "--- Rebuilding font cache (this may take a moment)... ---"
+fc-cache -fv
 
 echo "--- Fonts installation complete! ---"
-# The 'cleanup' function will now be called automatically by the trap.
