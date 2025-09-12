@@ -13,7 +13,6 @@ PACKAGES=(
     # Core
     hyprland
     hyprland-qtutils
-    hypr
     mako          # Notification daemon
     pipewire      # Audio server
     wireplumber   # Session manager for PipeWire
