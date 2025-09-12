@@ -29,7 +29,7 @@ sudo pacman -Syu --noconfirm --needed \
     git base-devel cmake ninja gcc \
     wayland-protocols libdisplay-info libliftoff \
     libinput libxkbcommon pango cairo udisks2 tomlplusplus \
-    acquamarine \
+    aquamarine \
 
 # --- 2. BUILD AND INSTALL HYPRLAND ---
 echo "--- Cloning and building Hyprland from source ---"
