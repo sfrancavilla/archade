@@ -20,7 +20,7 @@ trap cleanup EXIT ERR INT TERM
 
 # --- 1. INSTALL SYSTEM FONTS ---
 echo "--- Installing Noto fonts from official repositories... ---"
-sudo pacman -Syu --noconfirm --needed noto-fonts noto-fonts-cjk noto-fonts-emoji
+sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-cjk noto-fonts-emoji
 
 # --- 2. INSTALL NERD FONTS FROM SOURCE ---
 echo "--- Installing Nerd Fonts from source... ---"

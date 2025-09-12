@@ -11,6 +11,9 @@ echo "--- Installing Hyprland and essential components... ---"
 # List of packages to install via yay
 PACKAGES=(
     # Core
+    hyprland
+    hyprland-qtutils
+    hypr
     mako          # Notification daemon
     pipewire      # Audio server
     wireplumber   # Session manager for PipeWire
@@ -32,6 +35,6 @@ PACKAGES=(
 )
 
 # Use yay to install all the packages
-pacman -Syu --noconfirm ${PACKAGES[@]}
+pacman -S --noconfirm ${PACKAGES[@]}
 
 echo "--- Desktop Environment installation complete! ---"
