@@ -16,7 +16,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 # Define the source directory for our local font files.
 # This navigates up two levels from 'scripts/install/' to the project root.
-SOURCE_DIR="$SCRIPT_DIR/../../local-fonts"
+SOURCE_DIR="$SCRIPT_DIR/../../assets/local-fonts"
 
 # Define the destination directories on the system.
 # Fonts will be installed for the current user.
