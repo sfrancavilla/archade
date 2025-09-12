@@ -2,10 +2,13 @@
 
 set -eo pipefail
 
-echo "--- Installing stow for dotfile management ---"
-sudo pacman -S --noconfirm --needed stow
-
 echo "--- Stowing dotfiles ---"
+
+if ! command -v stow &> /dev/null; then
+    echo "--- Stow not found. Installing now... ---"
+    sudo pacman -Syu --noconfirm --needed stow
+    echo "--- Stow installation complete ---"
+fi
 
 DOTFILES_DIR="dotfiles"
 
