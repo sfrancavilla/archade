@@ -10,7 +10,7 @@ echo "The system will automatically reboot in 5 seconds."
 # Use 'read -t 5' to wait for input for 5 seconds.
 # The prompt (Y/n) indicates that 'Yes' is the default action.
 # The return code of 'read' will be non-zero on timeout.
-read -t 5 -p "Do you want to reboot now? (Y/n, it will reboot in 5 seconds if no input is given): " choice
+read -t 5 -p "Do you want to reboot now? (Y/n): " choice
 
 # Check if the user explicitly entered 'n' or 'N'.
 # If they entered anything else (including 'y', 'yes', or just pressing Enter),
