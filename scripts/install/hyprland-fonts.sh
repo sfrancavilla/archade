@@ -33,7 +33,7 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 cd nerd-fonts
 
 # Install both fonts with a single command
-./install.sh CascadiaCode NerdFontsSymbolsOnly
+./install.sh CascadiaCode Symbols-Only
 
 # Go back to the original directory
 popd
