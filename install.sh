@@ -13,9 +13,15 @@ source ./scripts/install/pacman.sh
 source ./scripts/install/hyprland-apps.sh
 source ./scripts/install/hyprland-fonts.sh
 
+# Install the default configurations
+source ./scripts/config/default.sh
+
 echo "#####################################################"
 echo "#                                                   #"
 echo "#            ARCHADE SETUP COMPLETE!                #"
-echo "#      Please reboot for all changes to apply.      #"
+echo "#      The system will reboot in 5 seconds.         #"
 echo "#                                                   #"
 echo "#####################################################"
+
+# Reboot the system after 5 seconds
+source ./scripts/install/reboot.sh

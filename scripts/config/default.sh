@@ -1,44 +1,87 @@
 #!/bin/bash
 
-# This script uses 'stow' to manage dotfiles. It is designed to be run
-# from any directory by dynamically finding its own location.
-# This version uses the '--restow' flag for a more forceful application.
+# Installer of default configurations
 
-set -eo pipefail
+echo "It's time to install the default configurations!"
+echo "This script will help you set up the default configurations safely."
 
-echo "--- Stowing dotfiles ---"
+# --- DEFINE DIRECTORIES ---
+SCRIPTS_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+DEFAULT_DIR="$SCRIPTS_DIR/../../default"
 
-# --- 1. ENSURE STOW IS INSTALLED ---
-if ! command -v stow &> /dev/null; then
-    echo "--- 'stow' not found. Installing now... ---"
-    sudo pacman -Syu --noconfirm --needed stow
-    echo "--- 'stow' installation complete ---"
-fi
-
-# --- 2. DEFINE DIRECTORIES RELATIVE TO THE SCRIPT'S LOCATION ---
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-DOTFILES_DIR="$SCRIPT_DIR/../../dotfiles"
+# The user's home directory
 TARGET_DIR=~
 
-# --- 3. STOW THE DOTFILES ---
-DIRECTORIES=(
-    hyprland
-    waybar
+# --- LIST OF CONFIGS TO INSTALL ---
+CONFIGS=(
+    fastfetch
+    hypr
     kitty
     starship
-    zsh
-    fastfetch
+    waybar
     wofi
+    zsh
 )
 
-for dir in "${DIRECTORIES[@]}"; do
-    if [ -d "$DOTFILES_DIR/$dir" ]; then
-        echo "--- Restowing $dir ---"
-        stow -R "$dir" -t "$TARGET_DIR" --dir="$DOTFILES_DIR"
-    else
-        echo "--- WARNING: Directory '$dir' not found in '$DOTFILES_DIR', skipping. ---"
-    fi
+# --- MAIN INSTALLATION LOOP ---
+for config in "${CONFIGS[@]}"; do
+    echo ""
+    echo "Processing '$config' configuration..."
+    
+    # Use find to get a list of all files in the config directory.
+    # This is more robust than just assuming the structure.
+    SOURCE_FILES=$(find "$DEFAULT_DIR/$config" -type f)
+
+    for source_file in $SOURCE_FILES; do
+        # Create the relative path to determine the destination.
+        relative_path="${source_file#$DEFAULT_DIR/$config/}"
+        dest_file="$TARGET_DIR/.config/$relative_path"
+        
+        # Ensure the destination directory exists.
+        mkdir -p "$(dirname "$dest_file")"
+
+        # --- CHECK FOR CONFLICTS ---
+        if [ -f "$dest_file" ] || [ -L "$dest_file" ]; then
+            echo "  -> WARNING: '$relative_path' already exists."
+            read -p "     Do you want to overwrite it? [y/N] " response
+            if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+                # User said yes, so create a backup and then link.
+                echo "     Backing up to ${dest_file}.bak"
+                mv "$dest_file" "${dest_file}.bak"
+                ln -sv "$source_file" "$dest_file"
+            else
+                echo "     Skipping '$relative_path'."
+            fi
+        else
+            # No conflict, just create the symlink.
+            ln -sv "$source_file" "$dest_file"
+        fi
+    done
 done
 
-echo "--- Dotfile management complete ---"
+echo ""
+echo "Installation complete!"
+echo "You may need to restart your shell or log out for all changes to take effect."
 
+```
+
+### Step 3: Write an Excellent README.md
+
+This is the most critical step. Your `README.md` is the user manual.
+
+It should include:
+* **What is this?** A brief description of your setup (e.g., "My personal Hyprland setup on Arch Linux").
+* **Prerequisites:** What software do they need before running your script? (`git`, `dialog` for popups, etc.).
+* **How to Install:** Give them the exact, copy-pasteable commands.
+    ```markdown
+    ## Installation
+    1. Clone the repository:
+       ```bash
+       git clone [https://github.com/your-username/dotfiles.git](https://github.com/your-username/dotfiles.git)
+       ```
+    2. Run the installer:
+       ```bash
+       cd dotfiles
+       ./install.sh
+       ```
+    
