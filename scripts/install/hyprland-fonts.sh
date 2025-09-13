@@ -10,13 +10,7 @@ echo "--- Installing Noto fonts from official repositories... ---"
 sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-cjk noto-fonts-emoji
 
 echo "--- Starting local font installation ---"
-# --- 1. DEFINE FILE PATHS ---
-# Get the absolute path to the directory where this script is located.
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-
-# Define the source directory for our local font files.
-# This navigates up two levels from 'scripts/install/' to the project root.
-SOURCE_DIR="$SCRIPT_DIR/../../assets/local-fonts"
+SOURCE_DIR="$HOME/archade/assets/local-fonts"
 
 # Define the destination directories on the system.
 # Fonts will be installed for the current user.

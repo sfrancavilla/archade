@@ -13,27 +13,27 @@ PACKAGES=(
     # Core
     hyprland
     hyprland-qtutils
+    hyprpolkitagent # Hyprland polkit agent
     mako          # Notification daemon
     pipewire      # Audio server
+    qt5-wayland qt6-wayland # For app compatibility
     wireplumber   # Session manager for PipeWire
     xdg-desktop-portal-hyprland # Desktop portal for Hyprland
-    hyprpolkitagent # Hyprland polkit agent
-    qt5-wayland qt6-wayland # For app compatibility
-    stow
     # Utilities
-    waybar       # Status bar
-    wofi         # Application launcher
-    kitty        # Terminal
-    zsh          # Shell
-    starship     # Prompt
+    blueberry    # Bluetooth manager
+    cliphist     # Clipboard history
+    fastfetch    # System info
     hyprpaper    # Wallpaper manager
     hyprpicker   # Color picker
-    cliphist     # Clipboard history
+    kitty        # Terminal
     nautilus     # File manager
-    blueberry    # Bluetooth manager
+    starship     # Prompt
+    waybar       # Status bar
+    wofi         # Application launcher
+    zsh          # Shell
 )
 
-# Use yay to install all the packages
+# Install all the packages
 pacman -S --noconfirm ${PACKAGES[@]}
 
 echo "--- Desktop Environment installation complete! ---"
