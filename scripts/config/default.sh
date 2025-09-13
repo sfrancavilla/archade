@@ -81,7 +81,7 @@ for config in "${CONFIGS_IN_HOME_DIR[@]}"; do
     # This loop assumes the file in the source dir (e.g., 'zshrc') should be
     # named with a dot prefix in the destination (e.g., '.zshrc').
     find "$DEFAULT_DIR/$config" -type f | while read -r source_file; do
-        dest_file="$TARGET_DIR/.$(basename "$source_file")"
+        dest_file="$TARGET_DIR/$(basename "$source_file")"
         link_file "$source_file" "$dest_file"
     done
 done
