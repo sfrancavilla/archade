@@ -3,11 +3,10 @@
 # This script handles configurations that belong in ~/.config/ and those in the home directory.
 
 # --- DEFINE DIRECTORIES ---
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-DEFAULT_DIR="$SCRIPT_DIR/../../default"
+DEFAULT_DIR=$HOME/archade/default
 
 # Define the target, which is the user's home directory.
-TARGET_DIR=~
+TARGET_DIR=$HOME
 
 # --- LIST OF CONFIGS TO INSTALL ---
 
