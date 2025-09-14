@@ -14,7 +14,7 @@ source ./scripts/install/hyprland-apps.sh
 source ./scripts/install/hyprland-fonts.sh
 
 # Install the default configurations
-source ./scripts/config/default.sh
+source ./scripts/config/base.sh
 
 echo "#####################################################"
 echo "#                                                   #"

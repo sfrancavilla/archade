@@ -16,4 +16,4 @@ if [ -z "$RANDOM_WALLPAPER" ]; then
 fi
 
 # Set the wallpaper with a transition
-swww img "$RANDOM_WALLPAPER" --transition-type wipe --transition-angle 30 --transition-step 90 >/dev/null 2>&1
+# swww img "$RANDOM_WALLPAPER" --transition-type wipe --transition-angle 30 --transition-step 90 >/dev/null 2>&1
