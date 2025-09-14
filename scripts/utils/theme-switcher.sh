@@ -33,6 +33,16 @@ mkdir -p "$THEMER_DIR"
 ln -snf "$THEME_PATH" "$CURRENT_THEME_LINK"
 echo "  -> Central theme link updated."
 
+# 3. RELOAD APPLICATIONS
+echo "Reloading applications to apply the new theme..."
+# Hyprland
+hyprctl reload
+echo "  -> Hyprland reloaded."
+
+# Kitty (Send a signal to all running Kitty instances to reload their config)
+pkill -USR1 kitty
+echo "  -> Kitty instances signaled to reload."
+
 echo ""
 echo "Theme switch to '$SELECTED_THEME' complete!"
 
