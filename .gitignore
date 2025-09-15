@@ -9,3 +9,6 @@
 
 # Ignore environment variables files
 .env
+
+# Ignore user-specific Hyprland override files
+**/user.conf

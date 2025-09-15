@@ -79,8 +79,6 @@ if pgrep -x "mako" > /dev/null; then
     echo "  -> Mako reloaded."
 fi
 
-echo "  -> Starship will update on the next prompt."
-
 echo ""
 echo "Theme switch to '$SELECTED_THEME' complete!"
 
