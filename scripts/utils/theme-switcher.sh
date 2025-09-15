@@ -1,12 +1,26 @@
 #!/bin/bash
 
-# Switch the entire desktop theme, inspired by Omarchy.
-# It manages a single symlink and reloads all relevant applications.
+# The script manages the theme switching for the Archade desktop environment.
+# It manages a single symlink for composable configs (Hyprland, Kitty)
+# and handles full-file swaps for others (Starship).
 
 # --- CONFIGURATION ---
 THEMES_DIR="$HOME/archade/themes"
 THEMER_DIR="$HOME/.config/themer"
-CURRENT_THEME_LINK="$THEMER_DIR/theme" # This is the single, central symlink
+CURRENT_THEME_LINK="$THEMER_DIR/theme"
+
+# Apps that use the "base + partial" model via the central symlink.
+APPS_USING_PARTIALS=(
+    hypr
+    kitty
+    waybar
+    mako
+)
+
+# Apps that require a full config file swap.
+APPS_WITH_FULL_CONFIG=(
+    starship
+)
 
 # --- SCRIPT LOGIC ---
 SELECTED_THEME=$1
@@ -25,24 +39,42 @@ if [ ! -d "$THEME_PATH" ]; then
     exit 2
 fi
 
-# 2. THEME SWITCHING (THE CORE LOGIC)
+# 2. THEME SWITCHING
+
+# --- Part A: Central Symlink for Partial-based Apps ---
 echo "Switching to theme: $SELECTED_THEME"
-# Create the base directory if it doesn't exist
 mkdir -p "$THEMER_DIR"
-# Update the single, central symlink to point to the new theme directory.
 ln -snf "$THEME_PATH" "$CURRENT_THEME_LINK"
-echo "  -> Central theme link updated."
+echo "  -> Central theme link updated for partial-based apps."
+
+# --- Part B: Full Config Swap for Starship ---
+for app in "${APPS_WITH_FULL_CONFIG[@]}"; do
+    source_file="$THEME_PATH/${app}.toml"
+    dest_file="$HOME/.config/${app}.toml"
+
+    if [ -f "$source_file" ]; then
+        echo "  -> Swapping full config for '$app'..."
+        # Create a symlink from ~/.config/starship.toml to the theme's version
+        ln -snf "$source_file" "$dest_file"
+    fi
+done
+
 
 # 3. RELOAD APPLICATIONS
 echo "Reloading applications to apply the new theme..."
-# Hyprland
 hyprctl reload
 echo "  -> Hyprland reloaded."
 
-# Kitty (Send a signal to all running Kitty instances to reload their config)
+killall -SIGUSR2 waybar
+echo "  -> Waybar reloaded."
+
 pkill -USR1 kitty
 echo "  -> Kitty instances signaled to reload."
 
+makoctl reload
+echo "  -> Mako reloaded."
+
+echo "  -> Starship will update on the next prompt."
+
 echo ""
 echo "Theme switch to '$SELECTED_THEME' complete!"
-
