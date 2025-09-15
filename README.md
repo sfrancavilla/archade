@@ -32,8 +32,7 @@ Before you begin, ensure you have a base Arch Linux installation with a graphica
     git clone https://github.com/sfrancavilla/archade.git
     cd archade
     ```
-    *Replace `https://github.com/sfrancavilla/archade.git` with the actual URL of your repository.*
-
+    
 2.  **Make the Script Executable**
 
     You'll need to grant execute permissions to the main installation script.
