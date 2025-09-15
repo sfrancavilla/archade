@@ -30,7 +30,6 @@ PACKAGES=(
     starship     # Prompt
     waybar       # Status bar
     wofi         # Application launcher
-    zsh          # Shell
 )
 
 # Install all the packages

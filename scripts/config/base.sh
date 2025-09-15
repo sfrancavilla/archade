@@ -25,7 +25,6 @@ XDG_CONFIGS=(
 # List of apps with traditional dotfiles (live in ~/)
 HOME_DOTFILES=(
     bash
-    zsh
     git
 )
 
