@@ -1,0 +1,13 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Arcade gaming themed prompt symbols
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[🚀](bold green)' # Rocket for successful command launches
+error_symbol = '[💥](bold red)' # Explosion for failed commands (game over!)
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
