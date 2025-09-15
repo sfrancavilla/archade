@@ -1,25 +1,19 @@
 #!/bin/bash
 
 # The script manages the theme switching for the Archade desktop environment.
-# It manages a single symlink for composable configs (Hyprland, Kitty)
-# and handles full-file swaps for others (Starship).
+# It handles both "base + partial" configs via a central symlink and
+# full, self-contained configuration files.
 
 # --- CONFIGURATION ---
 THEMES_DIR="$HOME/archade/themes"
 THEMER_DIR="$HOME/.config/themer"
 CURRENT_THEME_LINK="$THEMER_DIR/theme"
 
-# Apps that use the "base + partial" model via the central symlink.
-APPS_USING_PARTIALS=(
-    hypr
-    kitty
-    waybar
-    mako
-)
-
 # Apps that require a full config file swap.
-APPS_WITH_FULL_CONFIG=(
-    starship
+# Use the FULL FILENAME to handle any extension.
+FULL_CONFIG_FILES=(
+    "starship.toml"
+    # Example for another app: "btop.conf"
 )
 
 # --- SCRIPT LOGIC ---
@@ -45,17 +39,19 @@ fi
 echo "Switching to theme: $SELECTED_THEME"
 mkdir -p "$THEMER_DIR"
 ln -snf "$THEME_PATH" "$CURRENT_THEME_LINK"
-echo "  -> Central theme link updated for partial-based apps."
+echo "  -> Central theme link updated for all partial-based apps."
 
-# --- Part B: Full Config Swap for Starship ---
-for app in "${APPS_WITH_FULL_CONFIG[@]}"; do
-    source_file="$THEME_PATH/${app}.toml"
-    dest_file="$HOME/.config/${app}.toml"
+# --- Part B: Full Config Swap for self-contained configs ---
+for config_file in "${FULL_CONFIG_FILES[@]}"; do
+    source_file="$THEME_PATH/$config_file"
+    dest_file="$HOME/.config/$config_file"
 
     if [ -f "$source_file" ]; then
-        echo "  -> Swapping full config for '$app'..."
+        echo "  -> Swapping full config for '$config_file'..."
         # Create a symlink from ~/.config/starship.toml to the theme's version
         ln -snf "$source_file" "$dest_file"
+    else
+        echo "  -> NOTE: No config for '$config_file' found in theme '$SELECTED_THEME'. Skipping."
     fi
 done
 
@@ -65,16 +61,26 @@ echo "Reloading applications to apply the new theme..."
 hyprctl reload
 echo "  -> Hyprland reloaded."
 
-killall -SIGUSR2 waybar
-echo "  -> Waybar reloaded."
+# Use a more robust way to find and signal waybar
+if pgrep -x "waybar" > /dev/null; then
+    killall -SIGUSR2 waybar
+    echo "  -> Waybar reloaded."
+fi
 
-pkill -USR1 kitty
-echo "  -> Kitty instances signaled to reload."
+# Use a more robust way to find and signal kitty
+if pgrep -x "kitty" > /dev/null; then
+    pkill -USR1 kitty
+    echo "  -> Kitty instances signaled to reload."
+fi
 
-makoctl reload
-echo "  -> Mako reloaded."
+# Use a more robust way to find and signal mako
+if pgrep -x "mako" > /dev/null; then
+    makoctl reload
+    echo "  -> Mako reloaded."
+fi
 
 echo "  -> Starship will update on the next prompt."
 
 echo ""
 echo "Theme switch to '$SELECTED_THEME' complete!"
+
