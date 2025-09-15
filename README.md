@@ -29,10 +29,10 @@ Before you begin, ensure you have a base Arch Linux installation with a graphica
     Open a terminal and clone the Archade repository to your local machine.
 
     ```bash
-    git clone https://github.com/your-username/archade.git
+    git clone https://github.com/sfrancavilla/archade.git
     cd archade
     ```
-    *Replace `https://github.com/your-username/archade.git` with the actual URL of your repository.*
+    *Replace `https://github.com/sfrancavilla/archade.git` with the actual URL of your repository.*
 
 2.  **Make the Script Executable**
 
