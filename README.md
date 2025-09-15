@@ -83,7 +83,7 @@ Edit your user.conf and add your settings. You can now add any valid Hyprland se
 vim user.conf
 ```
 
-## Example user.conf:
+### Example user.conf
 
 Let's say you want to use Alacritty as your default terminal and change the keybind for it. Your user.conf might look like this:
 
