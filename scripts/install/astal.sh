@@ -8,7 +8,7 @@ set -eo pipefail
 
 # --- 0. SETUP AND CLEANUP ---
 # Create a temporary directory in the user's home directory to avoid size limits of /tmp.
-BUILD_DIR=$(mkap -d "$HOME/astal-build.XXXXXX")
+BUILD_DIR=$(mktemp -d "$HOME/astal-build.XXXXXX")
 
 # Define a cleanup function. This will be called when the script exits for any reason.
 cleanup() {
@@ -18,6 +18,7 @@ cleanup() {
 
 # Set a trap to run the cleanup function on exit, error, or interrupt.
 trap cleanup EXIT ERR INT TERM
+
 
 # --- 1. CLONE AND BUILD ---
 echo "--- Cloning Astal from source... ---"
