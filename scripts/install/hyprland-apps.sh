@@ -5,17 +5,6 @@
 # Stop on any error
 set -eo pipefail
 
-# --- 0. PRE-EMPTIVE CLEANUP ---
-# Some packages might have pulled in 'jack2' as a dependency.
-# 'pipewire-jack' provides the same functionality and conflicts with it.
-# We explicitly remove the old package to prevent a conflict during the
-# non-interactive installation.
-echo "--- Removing potential conflicting audio packages... ---"
-# The '-Rdd' flag is used to remove a package and ignore its dependencies,
-# which is safe here because we are immediately installing a replacement.
-sudo pacman -Rdd --noconfirm jack2 2>/dev/null || true
-
-
 # --- 1. INSTALL HYPRLAND AND CORE COMPONENTS ---
 echo "--- Installing Hyprland and essential components... ---"
 
@@ -29,7 +18,13 @@ PACKAGES=(
     waybar                              # Status bar
     xdg-desktop-portal-hyprland         # Desktop portal for Hyprland
 
+    # --- Hardware Support ---
+    alsa-firmware                       # Essential firmware for many sound cards
+    sof-firmware                        # Firmware for modern Intel/AMD sound hardware (CRITICAL)
+
     # --- Complete Audio Stack ---
+    alsa-utils                          # For debugging tools like aplay, amixer
+
     pipewire                            # The core audio server
     wireplumber                         # The session manager for PipeWire
     pipewire-pulse                      # PulseAudio compatibility layer
@@ -46,6 +41,16 @@ PACKAGES=(
     nautilus                            # File manager
     starship                            # Prompt
     wofi                                # Application launcher
+
+    # --- Astral ---
+    meson
+    vala
+    valadoc
+    gobject-introspection
+    gtk3
+    gtk-layer-shell
+    gtk4
+    gtk4-layer-shell
 )
 
 # Install all the packages
