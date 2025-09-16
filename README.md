@@ -89,9 +89,9 @@ vim user.conf
 Let's say you want to use Alacritty as your default terminal and change the keybind for it. Your user.conf might look like this:
 
 ```bash
-# This is my personal user.conf file.
-
-# Override the default terminal application
+###################
+### KEYBINDINGS ###
+###################
 $mainMod = SUPER
 $terminal = alacritty
 
