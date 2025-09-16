@@ -60,9 +60,10 @@ Before you begin, ensure you have a base Arch Linux installation with a graphica
 ## Customization (Your Personal Settings)
 This project uses a layered configuration system to make customization safe and easy. This allows you to receive updates for the base configuration without creating conflicts with your personal tweaks.
 
+### Hyprland
 The core idea is to use a special user.conf file for Hyprland. This file is ignored by Git, so your personal changes will never be overwritten by a git pull.
 
-How to Add Your Personal Overrides
+#### How to Add Your Personal Overrides
 Follow these steps to create your personal configuration file for Hyprland:
 
 Navigate to the Hyprland config directory. After running the main install.sh script, all your configurations are managed from the standard ~/.config/ directory.
@@ -83,7 +84,7 @@ Edit your user.conf and add your settings. You can now add any valid Hyprland se
 vim user.conf
 ```
 
-### Example user.conf
+**Example user.conf**
 
 Let's say you want to use Alacritty as your default terminal and change the keybind for it. Your user.conf might look like this:
 
