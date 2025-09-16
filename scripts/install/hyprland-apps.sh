@@ -8,31 +8,36 @@ set -eo pipefail
 # --- 1. INSTALL HYPRLAND AND CORE COMPONENTS ---
 echo "--- Installing Hyprland and essential components... ---"
 
-# List of packages to install via yay
+# List of packages to install via pacman
 PACKAGES=(
-    # Core
+    # --- Core Desktop ---
     hyprland
-    hyprland-qtutils
-    hyprpolkitagent # Hyprland polkit agent
-    mako          # Notification daemon
-    pipewire      # Audio server
-    qt5-wayland qt6-wayland # For app compatibility
-    wireplumber   # Session manager for PipeWire
-    xdg-desktop-portal-hyprland # Desktop portal for Hyprland
-    # Utilities
-    blueberry    # Bluetooth manager
-    cliphist     # Clipboard history
-    fastfetch    # System info
-    hyprpaper    # Wallpaper manager
-    hyprpicker   # Color picker
-    kitty        # Terminal
-    nautilus     # File manager
-    starship     # Prompt
-    waybar       # Status bar
-    wofi         # Application launcher
+    mako                                # Notification daemon
+    qt5-wayland qt6-wayland             # For app compatibility
+    waybar                              # Status bar
+    xdg-desktop-portal-hyprland         # Desktop portal for Hyprland
+
+    # --- Complete Audio Stack ---
+    pipewire                            # The core audio server
+    wireplumber                         # The session manager for PipeWire
+    pipewire-pulse                      # PulseAudio compatibility layer (CRITICAL for most apps)
+    pipewire-alsa                       # ALSA compatibility layer
+    pipewire-jack                       # JACK compatibility layer (for pro-audio apps)
+
+    # --- Utilities & Applications ---
+    blueberry                           # Bluetooth manager
+    cliphist                            # Clipboard history
+    fastfetch                           # System info
+    hyprpaper                           # Wallpaper manager
+    hyprpicker                          # Color picker
+    kitty                               # Terminal
+    nautilus                            # File manager
+    starship                            # Prompt
+    wofi                                # Application launcher
 )
 
 # Install all the packages
-pacman -S --noconfirm ${PACKAGES[@]}
+sudo pacman -S --noconfirm --needed ${PACKAGES[@]}
 
 echo "--- Desktop Environment installation complete! ---"
+
