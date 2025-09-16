@@ -42,11 +42,12 @@ PACKAGES=(
     starship                            # Prompt
     wofi                                # Application launcher
 
-    # --- Astral ---
+    # --- Astal ---
     meson
     vala
     valadoc
     gobject-introspection
+    json-glib
     gtk3
     gtk-layer-shell
     gtk4
