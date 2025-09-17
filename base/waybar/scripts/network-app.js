@@ -2,13 +2,12 @@
 
 // This is a standalone GTK4 application that scans for Wi-Fi networks using Astal
 // and displays them in a custom, clickable pop-up window.
+// VERSION 2: Updated to use modern GJS import syntax.
 
-// Specify we are using GTK version 4.0
-imports.gi.versions.Gtk = '4.0';
-
-// Import the necessary libraries from the system
-const { Gtk, GLib } = imports.gi;
-const Astal = imports.gi.Astal;
+// Use modern ES6 import syntax for GJS, specifying the GTK version.
+import Gtk from 'gi://Gtk?version=4.0';
+import GLib from 'gi://GLib';
+import Astal from 'gi://Astal'; // Import the Astal library
 
 // We build our UI inside a Gtk.Application class, which is standard practice.
 class NetworkMenu extends Gtk.Application {
@@ -37,8 +36,10 @@ class NetworkMenu extends Gtk.Application {
             listBox.set_selection_mode(Gtk.SelectionMode.SINGLE); // Allow single selection
             scrolledWindow.set_child(listBox);
 
-            // --- GET AND DISPLAY NETWORKS using Astal ---
-            const network = new Astal.Network();
+            // --- GET AND DISPLAY NETWORKS using the modern Astal API ---
+            // Get the default, shared instance of the Network manager.
+            const network = Astal.Network.get_default();
+            
             // This function scans for and returns an array of network objects.
             const available_networks = network.get_visible_networks("wifi");
 
@@ -84,3 +85,4 @@ class NetworkMenu extends Gtk.Application {
 // --- RUN THE APPLICATION ---
 const app = new NetworkMenu();
 app.run(null); // The 'null' means we are not passing command-line arguments.
+
