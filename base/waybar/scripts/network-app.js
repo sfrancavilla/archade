@@ -1,88 +1,54 @@
-#!/usr/bin/env gjs
+#!/usr/bin/gjs
 
-// This is a standalone GTK4 application that scans for Wi-Fi networks using Astal
-// and displays them in a custom, clickable pop-up window.
-// VERSION 2: Updated to use modern GJS import syntax.
+import Gtk from 'gi://Gtk?version=4';
+import Network from 'gi://AstalNetwork';
 
-// Use modern ES6 import syntax for GJS, specifying the GTK version.
-import Gtk from 'gi://Gtk?version=4.0';
-import GLib from 'gi://GLib';
-import Astal from 'gi://Astal'; // Import the Astal library
+const app = new Gtk.Application({ application_id: 'com.archade.NetworkWidget' });
 
-// We build our UI inside a Gtk.Application class, which is standard practice.
-class NetworkMenu extends Gtk.Application {
-    constructor() {
-        super({ application_id: 'it.archade.NetworkMenu' });
-        this.window = null;
-    }
+app.connect('activate', () => {
+  const win = new Gtk.ApplicationWindow({
+    application: app,
+    title: 'Network',
+    default_width: 220,
+    default_height: 36,
+  });
 
-    // This function is called when the application is activated (run).
-    vfunc_activate() {
-        // If the window doesn't exist yet, build it.
-        if (!this.window) {
-            this.window = new Gtk.ApplicationWindow({
-                application: this,
-                title: 'Available Wi-Fi Networks',
-                default_width: 350,
-                default_height: 400,
-            });
+  const box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, spacing: 8, margin_top: 6, margin_bottom: 6, margin_start: 10, margin_end: 10 });
 
-            // Create a scrollable container in case the network list is long.
-            const scrolledWindow = new Gtk.ScrolledWindow();
-            this.window.set_child(scrolledWindow);
+  const icon = new Gtk.Image({ pixel_size: 16 });
+  const label = new Gtk.Label({ xalign: 0 });
 
-            // Create the list box that will hold our networks.
-            const listBox = new Gtk.ListBox();
-            listBox.set_selection_mode(Gtk.SelectionMode.SINGLE); // Allow single selection
-            scrolledWindow.set_child(listBox);
+  box.append(icon);
+  box.append(label);
 
-            // --- GET AND DISPLAY NETWORKS using the modern Astal API ---
-            // Get the default, shared instance of the Network manager.
-            const network = Astal.Network.get_default();
-            
-            // This function scans for and returns an array of network objects.
-            const available_networks = network.get_visible_networks("wifi");
+  const net = Network.get_default();
+  const wifi = net.get_wifi();
 
-            available_networks.forEach(net => {
-                const row = new Gtk.ListBoxRow();
-                const label = new Gtk.Label({
-                    // Display the SSID (Wi-Fi name) and signal strength
-                    label: `${net.ssid} (${net.signal_strength}%)`,
-                    xalign: 0, // Align text to the left
-                    margin_start: 12,
-                    margin_top: 8,
-                    margin_bottom: 8,
-                    margin_end: 12,
-                });
-                row.set_child(label);
-                // When a row is clicked ('activated'), call our function to connect.
-                row.connect('activate', () => this._on_network_selected(row));
-                listBox.append(row);
-            });
-        }
+  function refresh() {
+    const ssid = wifi.get_ssid() ?? 'Wi-Fi off';
+    const strength = wifi.get_enabled() ? `${wifi.get_strength()}%` : '';
+    icon.set_icon_name(wifi.get_icon_name() || 'network-wireless-offline-symbolic');
+    label.set_label([ssid, strength].filter(Boolean).join('  ·  '));
+  }
 
-        // Show the window to the user.
-        this.window.present();
-    }
+  // update on property changes
+  wifi.connect('notify::ssid', refresh);
+  wifi.connect('notify::strength', refresh);
+  wifi.connect('notify::icon-name', refresh);
+  wifi.connect('state-changed', refresh);
 
-    // This function is called when a user clicks a network in the list.
-    _on_network_selected(row) {
-        const label_text = row.get_child().get_label();
-        // Extract just the SSID from the line, e.g., "MyWifi (85%)" -> "MyWifi"
-        const ssid = label_text.split(" (")[0];
+  // click to toggle wifi on/off
+  box.add_controller(
+    (() => {
+      const click = new Gtk.GestureClick();
+      click.connect('released', () => wifi.set_enabled(!wifi.get_enabled()));
+      return click;
+    })()
+  );
 
-        // Send a desktop notification to give the user feedback.
-        GLib.spawn_command_line_async(`notify-send "Network Manager" "Attempting to connect to ${ssid}..."`);
-        
-        // Use nmcli (the system's network manager) to handle the connection.
-        GLib.spawn_command_line_async(`nmcli device wifi connect "${ssid}"`);
-        
-        // Close the application window after making a selection.
-        this.window.close();
-    }
-}
+  refresh();
+  win.set_child(box);
+  win.present();
+});
 
-// --- RUN THE APPLICATION ---
-const app = new NetworkMenu();
-app.run(null); // The 'null' means we are not passing command-line arguments.
-
+app.run([]);
