@@ -31,6 +31,10 @@ PACKAGES=(
     pipewire-alsa                       # ALSA compatibility layer
     pipewire-jack                       # JACK compatibility layer (replaces jack2)
 
+    # --- Networking ---
+    networkmanager                      # The primary network management daemon
+
+
     # --- Utilities & Applications ---
     blueberry                           # Bluetooth manager
     cliphist                            # Clipboard history

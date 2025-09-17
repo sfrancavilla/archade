@@ -39,7 +39,7 @@
         "format-ethernet": "{ifname} ",
         "format-disconnected": "󰖪 Disconnected",
         "tooltip-format": "{ifname} via {gwaddr}",
-        "on-click": "kitty --title \"nmtui-floating\" nmtui"
+        "on-click": "~/.config/waybar/scripts/network-app.js"
     },
     "custom/launcher": {
         "format": " ",
