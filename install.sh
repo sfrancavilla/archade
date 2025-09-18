@@ -12,7 +12,6 @@ echo "--- Starting Archade Setup ---"
 source ./scripts/install/pacman.sh
 source ./scripts/install/hyprland-apps.sh
 source ./scripts/install/hyprland-fonts.sh
-source ./scripts/install/astal.sh
 
 # Install the default configurations
 source ./scripts/config/base.sh
