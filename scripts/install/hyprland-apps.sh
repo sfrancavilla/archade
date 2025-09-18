@@ -31,10 +31,6 @@ PACKAGES=(
     pipewire-alsa                       # ALSA compatibility layer
     pipewire-jack                       # JACK compatibility layer (replaces jack2)
 
-    # --- Networking ---
-    networkmanager                      # The primary network management daemon
-
-
     # --- Utilities & Applications ---
     blueberry                           # Bluetooth manager
     cliphist                            # Clipboard history
@@ -45,17 +41,7 @@ PACKAGES=(
     nautilus                            # File manager
     starship                            # Prompt
     wofi                                # Application launcher
-
-    # --- Astal ---
-    meson
-    vala
-    valadoc
-    gobject-introspection
-    json-glib
-    gtk3
-    gtk-layer-shell
-    gtk4
-    gtk4-layer-shell
+    impala                              # Network manager
 )
 
 # Install all the packages
