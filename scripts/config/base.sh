@@ -23,6 +23,7 @@ XDG_DIRS=(
     waybar
     fastfetch
     wofi
+    impala
 )
 
 # Category 2: Apps with a single config FILE in ~/.config/
