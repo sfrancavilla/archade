@@ -36,7 +36,6 @@ XDG_FILES=(
 # Category 3: Apps with traditional dotfiles in ~/
 HOME_DOTFILES=(
     bash
-    git
 )
 
 # --- 1. LINK XDG DIRECTORIES ---
