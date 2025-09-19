@@ -37,6 +37,7 @@ PACKAGES=(
     fastfetch                           # System info
     hyprpaper                           # Wallpaper manager
     hyprpicker                          # Color picker
+    hyprlock                            # Lock screen
     kitty                               # Terminal
     nautilus                            # File manager
     starship                            # Prompt

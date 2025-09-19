@@ -100,3 +100,7 @@ bind = $mainMod, RETURN, exec, $terminal
 ```
 
 By following this method, you can tailor the setup to your exact needs while still being able to easily update the core dotfiles.
+
+
+## ToDo
+[ ] Install AUR package script
