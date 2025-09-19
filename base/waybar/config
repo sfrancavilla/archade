@@ -39,7 +39,7 @@
         "format-ethernet": "{ifname} ",
         "format-disconnected": "󰖪 Disconnected",
         "tooltip-format": "{ifname} via {gwaddr}",
-        "on-click": "~/.config/waybar/scripts/network-app.js"
+        "on-click": "kitty --class=Impala -e impala"
     },
     "custom/launcher": {
         "format": " ",
