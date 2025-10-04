@@ -4,7 +4,7 @@
     "spacing": 10,
     "modules-left": ["clock"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["battery", "pulseaudio", "network", "custom/launcher"],
+    "modules-right": ["battery", "pulseaudio", "network", "custom/launcher", "custom/lock"],
     "clock": {
         "format": "{:%a %H:%M, %b %d %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
@@ -42,8 +42,13 @@
         "on-click": "kitty --class=Impala -e impala"
     },
     "custom/launcher": {
-        "format": " ",
+        "format": "",
         "on-click": "wofi",
         "tooltip-format": "Search applications"
+    },
+    "custom/lock": {
+        "format": "󰌾",
+        "tooltip": false,
+        "on-click": "hyprlock"
     }
 }
