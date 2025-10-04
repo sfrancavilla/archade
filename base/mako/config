@@ -1,0 +1,45 @@
+# Mako Notification Configuration - Archade Default Theme
+# A clean, minimalist, Nord-inspired theme.
+
+# --- Global Settings ---
+# These settings apply to all notifications unless overridden.
+font=Caskaydia Cove Nerd Font 10
+
+# --- Layout and Sizing ---
+width=350
+margin=15
+padding=15
+border-size=2
+border-radius=8
+anchor=top-right
+
+default-timeout=6000
+max-visible=5
+sort=-time
+
+# --- Icons ---
+# Show icons in notifications. Mako will use the icon sent by the application.
+#icons=1
+#default-icon=
+
+# --- Urgency-Specific Styles ---
+# You can define different styles for low, normal, and critical notifications.
+
+[urgency=low]
+# A subtle, slightly transparent look for unimportant notifications.
+background-color=#3B4252E5
+border-color=#4C566AE5
+text-color=#D8DEE9
+
+[urgency=normal]
+# The standard look, matching the clean Nord aesthetic.
+background-color=#2E3440
+border-color=#81A1C1
+text-color=#ECEFF4
+
+[urgency=critical]
+# A high-contrast, unmissable red for important warnings.
+background-color=#BF616A
+border-color=#D08770
+text-color=#ECEFF4
+ignore-timeout=true

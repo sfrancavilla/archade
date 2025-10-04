@@ -32,18 +32,19 @@ PACKAGES=(
   pipewire-jack  # JACK compatibility layer (replaces jack2)
 
   # --- Utilities & Applications ---
-  blueberry  # Bluetooth manager
-  cliphist   # Clipboard history
-  fastfetch  # System info
-  hyprpaper  # Wallpaper manager
-  hyprpicker # Color picker
-  hyprlock   # Lock screen
-  hypridle   # Manage idle screen
-  kitty      # Terminal
-  nautilus   # File manager
-  starship   # Prompt
-  wofi       # Application launcher
-  impala     # Network manager
+  blueberry     # Bluetooth manager
+  brightnessctl # Brightness control
+  cliphist      # Clipboard history
+  fastfetch     # System info
+  hyprpaper     # Wallpaper manager
+  hyprpicker    # Color picker
+  hyprlock      # Lock screen
+  hypridle      # Manage idle screen
+  kitty         # Terminal
+  nautilus      # File manager
+  starship      # Prompt
+  wofi          # Application launcher
+  impala        # Network manager
 )
 
 # Install all the packages
