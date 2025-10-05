@@ -17,6 +17,7 @@ PACKAGES=(
   qt5-wayland qt6-wayland     # For app compatibility
   waybar                      # Status bar
   xdg-desktop-portal-hyprland # Desktop portal for Hyprland
+  xdg-desktop-portal-gtk
 
   # --- Hardware Support ---
   alsa-firmware # Essential firmware for many sound cards
