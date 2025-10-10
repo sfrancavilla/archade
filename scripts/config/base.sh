@@ -5,6 +5,7 @@
 # 1. XDG Directories (~/.config/app/)
 # 2. XDG Files      (~/.config/app.toml, ~/.config/app.conf, etc.)
 # 3. Home Dotfiles  (~/.bashrc)
+# 4. Local Share (~/.local/share)
 
 echo "Starting initial dotfiles setup..."
 
@@ -39,56 +40,55 @@ HOME_DOTFILES=(
   bash
 )
 
+# Category 4: Local Share (~/.local/share)
+LOCAL_SHARE=(
+  "applications"
+)
+
+link_configs() {
+    local source_base="$1"
+    local dest_base="$2"
+    local -n items=$3
+
+    for item in "${items[@]}"; do
+        local source_path="$source_base/$item"
+        local dest_path="$dest_base/$item"
+
+        if [ -e "$source_path" ]; then
+            echo "  -> Linking '$item'..."
+            if [ -e "$dest_path" ]; then
+                echo "     - Backing up existing config to ${dest_path}.bak"
+                mv "$dest_path" "$dest_path.bak.$(date +%Y%m%d-%H%M%S)"
+            fi
+            ln -s "$source_path" "$dest_path"
+        else
+            echo "  -> WARNING: Source not found for '$item'. Skipping."
+        fi
+    done
+}
+
 # --- 1. LINK XDG DIRECTORIES ---
 echo ""
 echo "--- Symlinking XDG Directories to ~/.config/ ---"
-for app in "${XDG_DIRS[@]}"; do
-  source_dir="$BASE_CONFIG_DIR/$app"
-  dest_dir="$CONFIG_TARGET_DIR/$app"
+link_configs "$BASE_CONFIG_DIR" "$CONFIG_TARGET_DIR" XDG_DIRS
 
-  if [ -d "$source_dir" ]; then
-    echo "  -> Linking directory for '$app'..."
-    if [ -e "$dest_dir" ]; then
-      mv "$dest_dir" "$dest_dir.bak.$(date +%Y%m%d-%H%M%S)"
-    fi
-    ln -s "$source_dir" "$dest_dir"
-  fi
-done
 
 # --- 2. LINK XDG FILES ---
 echo ""
 echo "--- Symlinking XDG Files to ~/.config/ ---"
-for config_file in "${XDG_FILES[@]}"; do
-  source_file="$BASE_CONFIG_DIR/$config_file"
-  dest_file="$CONFIG_TARGET_DIR/$config_file"
-
-  if [ -f "$source_file" ]; then
-    echo "  -> Linking file for '$config_file'..."
-    if [ -e "$dest_file" ]; then
-      mv "$dest_file" "$dest_file.bak.$(date +%Y%m%d-%H%M%S)"
-    fi
-    ln -s "$source_file" "$dest_file"
-  else
-    echo "  -> WARNING: Source file not found for '$config_file'. Skipping."
-  fi
-done
+link_configs "$BASE_CONFIG_DIR" "$CONFIG_TARGET_DIR" XDG_FILES
 
 # --- 3. LINK HOME DOTFILES ---
 echo ""
 echo "--- Symlinking traditional dotfiles to ~/ ---"
-for app in "${HOME_DOTFILES[@]}"; do
-  source_dir="$BASE_CONFIG_DIR/$app"
-  find "$source_dir" -type f | while read -r source_file; do
-    dest_file="$HOME_TARGET_DIR/.$(basename "$source_file")"
-    echo "  -> Linking dotfile for '$app'..."
-    if [ -e "$dest_file" ]; then
-      mv "$dest_file" "$dest_file.bak.$(date +%Y%m%d-%H%M%S)"
-    fi
-    ln -s "$source_file" "$dest_file"
-  done
-done
+link_configs "$BASE_CONFIG_DIR" "$HOME_TARGET_DIR" HOME_DOTFILES
 
-# --- 4. SET THE INITIAL THEME ---
+# --- 4. LINK LOCAL SHARE ---
+echo ""
+echo "--- Symlinking local share to ~/.local/share/ ---"
+link_configs "$BASE_CONFIG_DIR" "$HOME/.local/share" LOCAL_SHARE_DIRS
+
+# --- 5. SET THE INITIAL THEME ---
 echo ""
 echo "--- Setting the initial 'default' theme... ---"
 if [ -f "$THEME_SWITCHER_SCRIPT" ]; then

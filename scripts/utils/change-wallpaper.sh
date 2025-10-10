@@ -1,19 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Directory containing your wallpapers
-WALLPAPER_DIR="$HOME/archade/wallpapers"
+THEMER_DIR="$HOME/.config/themer"
+CURRENT_THEME_LINK="$THEMER_DIR/theme"
+WALLPAPER_DIR="$CURRENT_THEME_LINK/wallpapers/"
+CURRENT_WALL=$(hyprctl hyprpaper listloaded)
 
-# Check if directory exists
-if [ ! -d "$WALLPAPER_DIR" ]; then
-    exit 1
-fi
+# Get a random wallpaper that is not the current one
+WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" | shuf -n 1)
 
-# Select a random wallpaper
-RANDOM_WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.bmp" -o -name "*.gif" \) | shuf -n 1)
-
-if [ -z "$RANDOM_WALLPAPER" ]; then
-    exit 1
-fi
-
-# Set the wallpaper with a transition
-# swww img "$RANDOM_WALLPAPER" --transition-type wipe --transition-angle 30 --transition-step 90 >/dev/null 2>&1
+# Apply the selected wallpaper
+hyprctl hyprpaper reload ,"$WALLPAPER"

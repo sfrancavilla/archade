@@ -6,5 +6,5 @@ if pgrep -x "wofi" > /dev/null; then
     pkill wofi
 else
     # If wofi is not running, start it
-    wofi
+    wofi --sort-order alphabetical
 fi

@@ -48,7 +48,7 @@ for config_file in "${FULL_CONFIG_FILES[@]}"; do
 
     if [ -f "$source_file" ]; then
         echo "  -> Swapping full config for '$config_file'..."
-        # Create a symlink from ~/.config/starship.toml to the theme's version
+        # Create a symlink to the theme's version
         ln -snf "$source_file" "$dest_file"
     else
         echo "  -> NOTE: No config for '$config_file' found in theme '$SELECTED_THEME'. Skipping."
@@ -61,22 +61,23 @@ echo "Reloading applications to apply the new theme..."
 hyprctl reload
 echo "  -> Hyprland reloaded."
 
-# Use a more robust way to find and signal waybar
 if pgrep -x "waybar" > /dev/null; then
     killall -SIGUSR2 waybar
     echo "  -> Waybar reloaded."
 fi
 
-# Use a more robust way to find and signal kitty
 if pgrep -x "kitty" > /dev/null; then
     pkill -USR1 kitty
     echo "  -> Kitty instances signaled to reload."
 fi
 
-# Use a more robust way to find and signal mako
 if pgrep -x "mako" > /dev/null; then
     makoctl reload
     echo "  -> Mako reloaded."
+fi
+
+if pgrep -x "hyprpaper" > /dev/null; then
+    "$HOME/archade/scripts/utils/change-wallpaper.sh"
 fi
 
 echo ""
