@@ -38,6 +38,7 @@ XDG_FILES=(
 # Category 3: Apps with traditional dotfiles in ~/
 HOME_DOTFILES=(
   bash
+  bash_profile
 )
 
 # Category 4: Local Share (~/.local/share)

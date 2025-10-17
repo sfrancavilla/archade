@@ -5,6 +5,13 @@
     "modules-left": ["clock"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["battery", "pulseaudio", "network", "custom/launcher", "custom/lock"],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "󰊗",
+            "default": "󰺷"
+        }
+    },
     "clock": {
         "format": "{:%a %H:%M, %b %d %Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"

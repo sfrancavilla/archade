@@ -37,6 +37,7 @@ PACKAGES=(
   brightnessctl # Brightness control
   cliphist      # Clipboard history
   fastfetch     # System info
+  hyprpolkitagent # Polkit agent
   hyprpaper     # Wallpaper manager
   hyprpicker    # Color picker
   hyprlock      # Lock screen
@@ -46,6 +47,9 @@ PACKAGES=(
   starship      # Prompt
   wofi          # Application launcher
   impala        # Network manager
+  grim          # Screenshot tool
+  slurp          # Screenshot tool
+  uwsm libnewt  # Hyprland login manager
 )
 
 # Install all the packages
